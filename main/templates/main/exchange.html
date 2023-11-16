@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Exchange | HALOXCHANGE{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/exchange.css' %}">
+{% endblock head %}
+{% block body %}
+
+<nav>
+    <section class="navbar">
+        <div class="navLogoSection">
+            <a href="https://www.kredict.com">
+                <img src="{% static 'main/images/haloxchange.png' %}" alt="KREDICT LOGO">
+            </a>
+        </div>
+        <div class="navButtonSection">
+            <div class="navNetworkBox">
+                Decentralized Crypto Exchange
+            </div>
+        </div>
+    </section>
+</nav>
+<div class="navLine"></div>
+
+
+<section class="changeTokenWrapper" id="change-token-wrapper">
+    <div class="changeTokenBox">
+        <h3 class="changeTokenHeader">Select Token</h3>
+        <input type="text" placeholder="Token name or address" id="change-token-input">
+        <div class="availableTokenList">
+            {% for token in tokens %}
+            <a href="/exchange/bsc/{{token.address}}/{{token.url_slug}}">
+                <div class="availableTokenItem">
+                    {% if not token.icon_url %}
+                    <img src="{% static 'main/images/token.png' %}" alt="token-icon">
+                    {% else %}
+                    <img src="{{ token.icon_url }}" alt="token-icon">
+                    {% endif %}
+                    <p>{{token.symbol}}</p>
+                    <p>{{token.name}}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</section>
+
+{% endblock body %}

@@ -1,0 +1,370 @@
+nav {
+    width: 100%;
+    padding: 10px 0px;
+    background: rgb(10, 10, 15);
+    box-shadow: 0px 0px 5px black;
+    z-index: 999999;
+}
+
+.navbar {
+    width: 98%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navLogoSection {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+}
+.navMenuSection{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.navMenuItem{
+    color: rgb(170,170,170);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+.navMenuItem i{
+    font-size: 14px;
+    color: rgb(200,200,200);
+}
+.navMenuItem:hover{
+    color: orange;
+}
+#active-menu,
+#active-menu i {
+    color: orange;
+}
+#win-2{
+    font-size: 8px;
+    background: rgb(0,150,255);
+    color: white;
+    border-radius: 2px;
+    padding: 1px 3px;
+}
+.navLogoSection a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.navLogoSection a img {
+    height: 22px;
+    /* background: gray; */
+    margin: 0;
+    padding: 0;
+}
+
+.connectWalletBtn {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    background: gray;
+    padding: 4px 14px;
+    border-radius: 2px;
+    cursor: pointer;
+    color: black;
+    background: orange;
+    border: 1px solid orange;
+}
+
+.connectWalletBtn:hover {
+    box-shadow: 0px 0px 10px black;
+    color: orange;
+    background: transparent;
+}
+
+.navLine {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to left, rgb(0, 0, 0), var(--sell), rgb(0, 0, 0));
+}
+
+.navButtonSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.navNetworkBox,
+.navCurrencyBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    background: rgb(60, 60, 60);
+    border: 1px solid rgb(60, 60, 60);
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.navNetworkBox img,
+.navCurrencyBox img {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.networkChangeBox {
+    position: fixed;
+    top: 50px;
+    right: 160px;
+    background: rgb(60, 60, 60);
+    z-index: 99999;
+    padding: 20px;
+    border-radius: 2px;
+    animation: fade-pop 0.3s ease-in-out;
+    display: none;
+}
+
+.networkList{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    list-style: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.networkListItem img{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.networkListItem {
+    width: 100%;
+    text-align: left;
+}
+.networkListItem a {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    color: rgb(200, 200, 200);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 4px 10px;
+    gap: 8px;
+    font-size: 12px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.networkListItem:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid orange;
+}
+
+@keyframes fade-pop {
+    0% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@media(max-width:850px) {
+    .navMenuSection {
+        display: none;
+    }
+}
+@media(max-width: 700px) {
+    .navbar{
+        width: 96%;
+    }
+    .navLogoSection a img{
+        height: 12px;
+    }
+    .navNetworkBox {
+        display: none;
+    }
+    .navCurrencyBox {
+        font-size: 10px;
+        border: none;
+    }
+    .connectWalletBtn{
+        font-size: 10px;
+        padding: 4px 6px;
+    }
+    .networkChangeBox{
+        right: 20px;
+    }
+}
+.walletWrapper{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+    background: rgba(20,20,20,0.6);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+.walletContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: rgb(10, 10, 10);
+    box-shadow: 0px 0px 100px black;
+    padding: 25px 28px;
+    border-radius: 2px;
+    z-index: 999;
+    border: 1px solid rgb(60, 60, 60);
+    animation: slide 0.25s ease-in-out;
+}
+.walletContainer h3{
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: gray;
+    margin-bottom: 10px;
+}
+@keyframes slide {
+    0% {
+        opacity: 0.6;
+        transform: translateY(-250px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+        z-index: 999;
+    }
+}
+.walletList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+.walletRow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+.walletItem{
+    width: 100%;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    font-size: 10px;
+    cursor: pointer;
+    background: rgb(255,255,255,0.1);
+    padding: 5px 8px;
+    border-radius: 2px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding-right: 14px;
+    text-transform: uppercase;
+}
+.walletItem:hover{
+    background: rgb(255,255,255,0.25);
+}
+.walletItem img{
+    height: 28px;
+    object-fit: cover;
+}
+#injected-icon{
+    border-radius: 50%;
+    object-fit: cover;
+    width: 28px;
+    margin-right: 2px;
+}
+.walletClose{
+    font-size: 12px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: black;
+    background: orange;
+    width: 100%;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+@media(max-width:580px) {
+    #metamask,
+    #injected,
+    #trust,
+    #enkrypt {
+        display: none;
+    }
+    .walletList {
+        gap: 5px;
+    }
+    .walletRow {
+        gap: 0;
+    }
+}
+
+.walletDisconnect{
+    position: fixed;
+    right: 12px;
+    top: 50px;
+    width: 160px;
+    background: rgba(20,20,20,1);
+    padding: 10px;
+    box-shadow: 0px 0px 50px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    display: none;
+}
+.walletDisconnect p{
+    width: 100%;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: black;
+    padding: 5px 12px;
+    background: orange;
+    text-align: center;
+    cursor: pointer;
+}
+#close-dis{
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    background: rgb(60,60,60);
+    color: white;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}

@@ -1,0 +1,89 @@
+{% load static %}
+<nav>
+    <section class="navbar">
+        <div class="navLogoSection">
+            <a href="https://www.haloxchange.com">
+                <img src="{% static 'main/images/haloxchange.png' %}" alt="HALOXCHANGE LOGO">
+            </a>
+            <div class="navMenuSection">
+                <a href="https://haloxchange.com/presale" class="navMenuItem"><i class="las la-store"></i> Pre-sale</a>
+                <a href="https://exchange.haloxchange.com/" class="navMenuItem" id="active-menu"><i class="las la-exchange-alt"></i>
+                    Exchange</a>
+                <a href="https://swap.haloxchange.com" class="navMenuItem"><i class="las la-sync"></i> Swap</a>
+                <a href="https://prediction.haloxchange.com/" class="navMenuItem"><i class="las la-star"></i> Prediction
+                    <small id="win-2">win 2x</small></a>
+            </div>
+        </div>
+        <div class="navButtonSection">
+            <div class="navNetworkBox" onclick="toggleNetworkChange()">
+                <img id="network-icon" src="{% static 'main/images/chains/bsc.png' %}" alt="chainImage">
+                <p id="network-name"> Binance Smart Chain</p> <i id="network-caret" class="las la-caret-down"></i>
+            </div>
+            <a class="connectWalletBtn" id="connect-wallet-btn" onclick="openWallet()">Connect Wallet</a>
+        </div>
+    </section>
+</nav>
+<div class="navLine"></div>
+
+<div class="networkChangeBox" id="network-change-box">
+    <ul class="networkList">
+        <li class="networkListItem" onclick="changeNetworkURL('bsc')">
+            <a><img src="{% static 'main/images/chains/bsc.png' %}" alt="bnbImage"> Binance Smart Chain (BNB)</a>
+        </li>
+        <li class="networkListItem" onclick="changeNetworkURL('ethereum')">
+            <a><img src="{% static 'main/images/chains/ether.png' %}" alt="bnbImage"> Ethereum Mainnet (Ether)</a>
+        </li>
+        <li class="networkListItem" onclick="changeNetworkURL('polygon')">
+            <a><img src="{% static 'main/images/chains/polygon.png' %}" alt="bnbImage"> Polygon Mainnet (MATIC)</a>
+        </li>
+    </ul>
+</div>
+
+<section class="walletWrapper" id="wallet-container">
+    <div class="walletContainer">
+        <h3>Choose Wallet</h3>
+        <div class="walletList">
+            <div class="walletRow">
+                <div class="walletItem" id="metamask" onclick="web3App('metamask', true)">
+                    <img src="{% static 'main/images/wallet-icons/metaMask.png' %}" alt="walletIcon">
+                    <p>MetaMask</p>
+                </div>
+                <div class="walletItem" id="coinbase" onclick="web3App('coinbase', true)">
+                    <img src="{% static 'main/images/wallet-icons/coinbase.png' %}" alt="walletIcon">
+                    <p>Coinbase Wallet</p>
+                </div>
+            </div>
+            <div class="walletRow">
+                <div class="walletItem" id="trust" onclick="web3App('trustwallet', true)">
+                    <img src="{% static 'main/images/wallet-icons/trustWallet.png' %}" alt="walletIcon">
+                    <p>Trust Wallet</p>
+                </div>
+                <div class="walletItem" id="enkrypt" onclick="web3App('enkrypt', true)">
+                    <img src="{% static 'main/images/wallet-icons/enkrypt.png' %}" alt="walletIcon">
+                    <p>Enkrypt Wallet</p>
+                </div>
+            </div>
+            <div class="walletRow">
+                <div class="walletItem" id="wallet-connect" onclick="web3App('walletconnect', false)">
+                    <img src="{% static 'main/images/wallet-icons/walletConnect.png' %}" alt="walletIcon">
+                    <p>WalletConnect</p>
+                </div>
+                <div class="walletItem" id="injected" onclick="web3App('injected', true)">
+                    <img src="{% static 'main/images/wallet-icons/injected.jpg' %}" id="injected-icon" alt="walletIcon">
+                    <p>Injected</p>
+                </div>
+            </div>
+            <div class="walletRow">
+                <div class="walletItem" onclick="closeWallet()">
+                    <img src="{% static 'main/images/wallet-icons/close.png' %}" alt="walletIcon">
+                    <p>Close</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="walletDisconnect" id="wallet-disconnect">
+    <p onclick="disconnectWallet()">Disconnect</p>
+    <small id="close-dis" onclick="closeWalletDis()">Close</small>
+</div>

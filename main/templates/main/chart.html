@@ -1,0 +1,131 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block head %}
+<script src="{% static 'main/javascript/dojichart.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'main/css/dojichart.min.css' %}">
+{% endblock head %}
+
+{% block body %}
+<style>
+    body {
+        color: black;
+        background: white;
+    }
+</style>
+<h1>Doji Chart</h1>
+<div class="chart-container">
+    <div class="dojichart" id="my-dojichart">
+        <div class="region" data-name="timelabels"></div>
+        <div class="region" data-name="price"></div>
+        <div class="region" data-name="volume"></div>
+    </div>
+</div>
+
+<div>
+    <button onclick="moveLeft()">Left</button>
+    <button onclick="moveRight()">Right</button>
+
+</div>
+
+<script type="text/javascript">
+    var dojichart = new DojiChart.core.Chart(document.getElementById('my-dojichart'), {
+        fieldMap: {
+            time: 't',
+            open: 'o',
+            high: 'h',
+            low: 'l',
+            close: 'c'
+        }
+    });
+
+    // Create a chart panel with a candlestick chart layer
+    var price_chart_panel = new DojiChart.panel.TimeValuePanel({
+        primaryLayer: new DojiChart.layer.CandleLayer(),
+        height: 300
+    });
+
+    // Render the panel in the region named 'price'
+    dojichart.addComponent('price', price_chart_panel);
+
+    var time_labels_panel = new DojiChart.panel.TimeLabelsPanel();
+    dojichart.addComponent("timelabels", time_labels_panel);
+
+    // Dummy data
+    var data_arr = [
+        { 't': '2015-11-11T17:25:00.000000Z', 'o': 4672.3, 'h': 4675.3, 'l': 4671.0, 'c': 4671.4 },
+        { 't': '2015-11-11T17:30:00.000000Z', 'o': 4671.5, 'h': 4675.1, 'l': 4671.3, 'c': 4674.5 },
+        { 't': '2015-11-11T17:35:00.000000Z', 'o': 4674.5, 'h': 4678.6, 'l': 4674.5, 'c': 4676.2 },
+        { 't': '2015-11-11T17:40:00.000000Z', 'o': 4676.0, 'h': 4677.3, 'l': 4674.5, 'c': 4674.9 },
+        { 't': '2015-11-12T17:45:00.000000Z', 'o': 3404.7, 'h': 4676.2, 'l': 4673.2, 'c': 4673.3 },
+        { 't': '2015-11-14T17:25:00.000000Z', 'o': 4672.3, 'h': 4675.3, 'l': 4671.0, 'c': 4671.4 },
+        { 't': '2015-11-15T17:30:00.000000Z', 'o': 4671.5, 'h': 4675.1, 'l': 4671.3, 'c': 4674.5 },
+        { 't': '2015-11-17T17:35:00.000000Z', 'o': 4674.5, 'h': 4678.6, 'l': 4674.5, 'c': 4676.2 },
+        { 't': '2015-11-19T17:40:00.000000Z', 'o': 4676.0, 'h': 4677.3, 'l': 9000.5, 'c': 4674.9 },
+        { 't': '2015-11-21T17:45:00.000000Z', 'o': 4674.7, 'h': 4676.2, 'l': 4673.2, 'c': 4673.3 }
+    ];
+
+    // Load data
+    dojichart.loadData(data_arr, 'EURUSD', 'W');
+
+    let curr_scroll = 0;
+    dojichart.scroll(curr_scroll, false)
+
+    function moveLeft() {
+        curr_scroll += 5
+        dojichart.scroll(curr_scroll, false)
+
+    }
+    function moveRight() {
+        curr_scroll -= 5
+        dojichart.scroll(curr_scroll, false)
+
+    }
+</script>
+
+
+<script type="text/javascript">
+    // var options = {
+    //     chart: {
+    //         type: 'candlestick',
+    //         height: 350,
+    //         zoom: false
+    //     },
+    //     events: {
+    //         zoomed: null // Disable resetting of zoom when new data is added
+    //     },
+    //     series: [{
+    //         data: []
+    //     }],
+    //     xaxis: {
+    //         type: 'datetime'
+    //     },
+    //     yaxis: {
+    //         tooltip: {
+    //             enabled: true
+    //         }
+    //     },
+    // }
+
+    // var chart = new ApexCharts(document.querySelector("#chart"), options);
+    // chart.render();
+
+    // fetchData();
+
+    // // Fetch new data every 5 seconds
+    // setInterval(fetchData, 7000);
+
+    // function fetchData() {
+    //     // Make an AJAX call to fetch new data from the server
+    //     // and update the chart's data using the `updateSeries()` method
+    //     fetch('/api/get_data/0x55d398326f99059fF775485246999027B3197955/')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             chart.updateSeries([{
+    //                 data: data
+    //             }], true); // Set dataChanged to true to avoid resetting the zoom
+    //         });
+    // }
+
+</script>
+{% endblock %}

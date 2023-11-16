@@ -1,0 +1,461 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load utils %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+<script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+
+{% endblock head %}
+{% block title %}Exchange - {{token.url_slug}} | HALOXCHANGE{% endblock title %}
+
+{% block body %}
+
+{% include 'main/navbar.html' %}
+
+<!-- main-container--------------- -->
+<section class="container">
+
+    <section class=topBar>
+        <div class="topAction">
+            <div class="tokenChangeBox" onclick="openChangeToken()">
+                {% if not token.icon_url %}
+                <img src="{{default_icon}}" alt="token-icon">
+                {% else %}
+                <img src="{{ token.icon_url }}" alt="token-icon">
+                {% endif %}
+                <p><span id="token">{{token.symbol}}</span>/USD</p>
+            </div>
+            <div class="bscLink">
+                <a href="{{explorer}}/token/{{token.address}}" target="_blank">EXPLORER</a>
+            </div>
+            <div class="mobileTopSwitch" id="mobile-top-switch-open" onclick="openMobileTop()">
+                <i class="las la-bars"></i>
+            </div>
+            <div class="mobileTopSwitch" id="mobile-top-switch-close" onclick="closeMobileTop()">
+                <i class="las la-times"></i>
+            </div>
+            <div class="mobileTopOptions" id="mobile-top-options">
+                <a onclick="openListToken()"><i class="las la-stop-circle"></i>List Token</a>
+                <a onclick="openChangeTheme()"><i class="las la-brush"></i>Theme</a>
+            </div>
+        </div>
+        <div class="topStats">
+            <p class="priceBrace">Price: <span id="current-price">{{current_price|convert_to_eth}}</span></p>
+            <p>24h Volume: <span id="day-volume-token">{{day_volume|convert_to_custom:token.decimals}}</span>
+                ({{token.symbol}})</p>
+            <p>24h Volume: <span id="day-volume-usd">{{day_volume_usd|convert_to_eth}}</span> (USD)</p>
+            <p>24h High: <span id="day-high">{{day_high|convert_to_eth}}</span></p>
+            <p>24h Low: <span id="day-low">{{day_low|convert_to_eth}}</span></p>
+            <p><small>🔥</small> Burned: <span id="burned">0.00</span> <small>🔥</small></p>
+        </div>
+        <div class="topOptions">
+            <a onclick="openListToken()"><i class="las la-stop-circle"></i>List Token</a>
+            {% comment %} <a onclick="checkClaimReward()"><i class="las la-trophy"></i>Claim Reward</a> {% endcomment %}
+            <a onclick="openChangeTheme()"><i class="las la-brush"></i>Theme</a>
+        </div>
+    </section>
+
+    <section class="actionContainer">
+        <div class="sideBlocks">
+            <h4 class="sideBlockHeads">Order Book</h4>
+            <div class="orderHistorySwitch">
+                <p id="order-book-switch" onclick="switchOrderActive()">Active</p>
+                <p id="order-transaction-switch" onclick="switchOrderTransactions()">Trades</p>
+            </div>
+            <div class="orderBook" id="order-book-active">
+                <div class="orderBookParts">
+                    <h5 class="orderBookHeads">SELL</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span></p>
+                    <div id="order-book-sell">
+                    </div>
+                </div>
+                <div class="orderBookParts">
+                    <h5 class="orderBookHeads">BUY</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span></p>
+                    <div id="order-book-buy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="orderBook" id="order-book-transactions">
+                <div class="orderBookParts">
+                    <h5 class="orderBookHeads">SELL</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span></p>
+                    <div id="order-transaction-sell">
+
+                    </div>
+                </div>
+                <div class="orderBookParts">
+                    <h5 class="orderBookHeads">BUY</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span></p>
+                    <div id="order-transaction-buy">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="centerBlock">
+            <div class="chartBlock">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container" id="chart-container">
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+            <div class="modeChangeBar">
+                <div class="modeSwitch">
+                    <div id="limit-mode" onclick="changeTradeModeTo('limit')">Limit</div>
+                    <div id="market-mode" onclick="changeTradeModeTo('market')">Market</div>
+                </div>
+
+
+            </div>
+            <div class="actionBlock">
+                <div class="actionEventBlock">
+                    <h3 class="actionHeader">BUY <span id="action-token-buy">{{token.symbol}}</span></h3>
+                    <div class="actionText">
+                        <p>Available</p>
+                        <p><i class="las la-wallet"></i><span id="currency-balance">0.0000</span> {{currency}}</p>
+                    </div>
+                    <div class="inputWrapper">
+                        <input type="number" id="buy-price-input" placeholder="Price in USD"
+                            oninput="validateBuyPrice()">
+                        <small class="conversion-text" id="buy-conversion-text"></small>
+                    </div>
+                    <input type="number" id="buy-amount-input" placeholder="Amount" oninput="validateBuyAmount()">
+                    <small class="error-text" id="error-text-buy"></small>
+                    <div class="actionText">
+                        <p>Total</p>
+                        <p>≈ <span id="total-buy-amount">0.0000</span> {{currency}} ($ <span
+                                id="total-buy-usd">0.00</span>)</p>
+                    </div>
+                    <button class="actionEventButton buyBtn" onclick="placeBuyOrder()">BUY</button>
+                </div>
+                <div class="actionEventBlock">
+                    <h3 class="actionHeader">SELL <span id="action-token-sell">{{token.symbol}}</span></h3>
+                    <div class="actionText">
+                        <p>Available</p>
+                        <p><i class="las la-wallet"></i><span id="token-balance">0.0000</span> {{token.symbol}}</p>
+                    </div>
+                    <div class="inputWrapper">
+                        <input type="number" id="sell-price-input" placeholder="Price in USD"
+                            oninput="validateSellPrice()">
+                        <small class="conversion-text" id="sell-conversion-text"></small>
+                    </div>
+                    <input type="number" id="sell-amount-input" placeholder="Amount" oninput="validateSellAmount()">
+                    <small class="error-text" id="error-text-sell"></small>
+                    <div class="actionText">
+                        <p>Total</p>
+                        <p>≈ <span id="total-sell-amount">0.0000</span> {{currency}} ($ <span
+                                id="total-sell-usd">0.00</span>)</p>
+                    </div>
+                    <button class="actionEventButton sellBtn" onclick="placeSellOrder()">SELL</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sideBlocks">
+            <h4 class="sideBlockHeads">Order History</h4>
+            <div class="orderHistorySwitch">
+                <p id="current-pair-switch" onclick="switchTokenHistory()">Current Pair</p>
+                <p id="all-pair-switch" onclick="switchAllHistory()">All Pairs</p>
+            </div>
+            <div class="orderHistory" id="order-history-current">
+                <div class="orderHistoryParts">
+                    <h5 class="orderHistoryHeads">Sell</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span><span>Time</span><span>Revoke</span>
+                    </p>
+                    <div class="orderHistoryList" id="order-history-token-sell">
+
+                    </div>
+                </div>
+                <div class="orderHistoryParts">
+                    <h5 class="orderHistoryHeads">Buy</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span><span>Time</span><span>Revoke</span>
+                    </p>
+                    <div class="orderHistoryList" id="order-history-token-buy">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="orderHistory" id="order-history-all">
+                <div class="orderHistoryParts">
+                    <h5 class="orderHistoryHeads">Sell</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span><span>Time</span><span>Revoke</span>
+                    </p>
+                    <div class="orderHistoryList" id="order-history-all-sell">
+
+                    </div>
+                </div>
+                <div class="orderHistoryParts">
+                    <h5 class="orderHistoryHeads">Buy</h5>
+                    <p class="orderBookTitles"><span>Price</span><span>Amount</span><span>Time</span><span>Revoke</span>
+                    </p>
+                    <div class="orderHistoryList" id="order-history-all-buy">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+    </section>
+
+    <section class="listTokenWrapper" id="list-token-wrapper">
+        <div class="listTokenBox">
+            <h3 class="listTokenHeader">List Token</h3>
+            <div class="listTokenText">
+
+                GET 20 % of the exchange fees on the Listed token by you for lifetime {% endcomment %}
+            </div>
+            <input type="text" placeholder="Token Address" id="token-list-address" oninput="validateTokenListing()">
+            <small class="listTokenError" id="token-list-error"></small>
+            <div class="listTokenDetails" id="list-token-details">
+                <div class="listTokenDetailItems">
+                    <p>Token Name</p>
+                    <p id="list-token-name"></p>
+                </div>
+                <div class="listTokenDetailItems">
+                    <p>Token Symbol</p>
+                    <p id="list-token-symbol"></p>
+                </div>
+                <div class="listTokenDetailItems">
+                    <p>Decimals</p>
+                    <p id="list-token-decimals"></p>
+                </div>
+            </div>
+            <div class="listTokenAction">
+                <button class="listTokenBtn" id="list-token-btn" onclick="listToken()" disabled>List Now</button>
+                <button class="listTokenBtnClose" onclick="closeListToken()">Close</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="changeTokenWrapper" id="change-token-wrapper">
+        <div class="changeTokenBox">
+            <h3 class="changeTokenHeader">Change Token</h3>
+            <input type="text" placeholder="Token name or address" id="change-token-input" oninput="searchToken()">
+            <div class="availableTokenList" id="available-token-list">
+                {% for token in allTokens %}
+                <a href="/exchange/{{chain}}/{{token.token.address}}/{{token.token.url_slug}}">
+                    <div class="availableTokenItem">
+                        {% if not token.token.icon_url %}
+                        <img src="{{default_icon}}" alt="token-icon">
+                        {% else %}
+                        <img src="{{ token.token.icon_url }}" alt="token-icon">
+                        {% endif %}
+                        <p>{{token.token.symbol}} / USD</p>
+                        <p>{{token.token.name}}</p>
+                        <p class="list-volume">
+                            {{token.day_volume|add:token.unreal_volume|convert_to_custom:token.token.decimals|to_fixed}}
+                        </p>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="tokenNotFound" id="not-found">
+                <p>Not found token you're looking for?</p>
+                <a class="toSwapBtn" onclick="redirectSwap()"" target=" _blank">Head to Swap</a>
+            </div>
+            <a class="changeTokenCloseBtn" onclick="closeChangeToken()">Close</a>
+        </div>
+        </div>
+    </section>
+
+    <section class="changeCurrencyWrapper" id="change-currency-wrapper">
+        <div class="changeCurrencyBox">
+            <h3 class="changeCurrencyHeader">Change Currency</h3>
+            <div class="availableCurrencyList">
+                <a href="">
+                    <div class="availableCurrencyItem">
+                        <img src="{% static 'main/images/bnb.png' %}" alt="currency-icon">
+                        <p>{{currency}}</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="availableCurrencyItem">
+                        <img src="{% static 'main/images/usdt.png' %}" alt="currency-icon">
+                        <p>USDT</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="availableCurrencyItem">
+                        <img src="{% static 'main/images/busd.webp' %}" alt="currency-icon">
+                        <p>BUSD</p>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="availableCurrencyItem">
+                        <img src="{% static 'main/images/usdc.webp' %}" alt="currency-icon">
+                        <p>USDC</p>
+                    </div>
+                </a>
+            </div>
+            <a class="changeCurrencyCloseBtn" onclick="closeChangeCurrency()">Close</a>
+        </div>
+        </div>
+    </section>
+
+    <section class="claimRewardWrapper" id="claim-reward-wrapper">
+        <div class="claimRewardBox">
+            <h3 class="claimRewardHeader">Claim Reward</h3>
+            <div class="claimRewardAvailable">
+                <p>Tokens Listed: <span id="claim-listed-tokens">0</span></p>
+                <p>Reward Earned: <span id="claim-listed-reward">0</span> {{currency}}</p>
+            </div>
+            <div class="claimAction">
+                <button class="claimBtn" onclick="claimReward()">Claim Now</button>
+                <button class="claimBtnClose" onclick="closeClaimReward()">Close</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="changeThemeWrapper" id="change-theme-wrapper">
+        <div class="changeThemeBox">
+            <h3 class="changeThemeHeader">Change Theme</h3>
+            <div class="availableThemeList">
+                <div class="themeItem" onclick="changeTheme(1)">
+                    <div class="themeColorBox">
+                        <div id="color-orange"></div>
+                        <div id="color-blue"></div>
+                    </div>
+                    <p>Halo - Default</p>
+                </div>
+                <div class="themeItem" onclick="changeTheme(5)">
+                    <div class="themeColorBox">
+                        <div id="color-red-luke"></div>
+                        <div id="color-green-luke"></div>
+                    </div>
+                    <p>Halo - LukeWarm</p>
+                </div>
+                <div class="themeItem" onclick="changeTheme(4)">
+                    <div class="themeColorBox">
+                        <div id="color-red-tv"></div>
+                        <div id="color-green-tv"></div>
+                    </div>
+                    <p>TradingView</p>
+                </div>
+                <div class="themeItem" onclick="changeTheme(2)">
+                    <div class="themeColorBox">
+                        <div id="color-red-dim"></div>
+                        <div id="color-green-dim"></div>
+                    </div>
+                    <p>Classic</p>
+                </div>
+                <div class="themeItem" onclick="changeTheme(3)">
+                    <div class="themeColorBox">
+                        <div id="color-red"></div>
+                        <div id="color-green"></div>
+                    </div>
+                    <p>Standard</p>
+                </div>
+
+            </div>
+            <a class="changeThemeCloseBtn" onclick="closeChangeTheme()">Close</a>
+        </div>
+    </section>
+
+    <div class="newTokenBar">
+        <div class="tokenBarPart">
+            <div class="newTokenHeader">NEWLY LISTED TOKENS</div>
+            <ul class="newTokenList">
+                {% for token_ in new_tokens %}
+                <a href="/exchange/{{chain}}/{{token_.address}}/{{token_.url_slug}}">
+                    <li class="newTokenListItem">{{token_.name}} ({{token_.symbol}})</li>
+                </a>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="tokenBarPart">
+            <ul class="trendingTokenList">
+                {% for token_ in trending_tokens %}
+                <a href="/exchange/{{chain}}/{{token_.address}}/{{token_.url_slug}}">
+                    <li class="newTokenListItem">{{token_.name}} ({{token_.symbol}})</li>
+                </a>
+                {% endfor %}
+            </ul>
+            <div class="newTokenHeader">TRENDING TOKENS</div>
+        </div>
+    </div>
+
+    <div class="promptWrapper" id="listing-token-prompt">
+        <img src="{% static 'main/images/loader.gif' %}" alt="loaderImg">
+    </div>
+
+    <div class="exchangePopWrapper" id="exchange-pop">
+        <div class="exchangePopBox">
+            <h3 class="exchangePopHeader">Decentralized Exchange</h3>
+            <p class="exchangePopText">
+                A new revolutionary way to buy and sell crypto, like in a regular CEX but decentralize, you always has
+                custody of your crypto, remember your wallet your crypto, you just need to connect your wallet and start
+                buying and selling. from your wallet to the Haloxchange and back, the only thing you need to do is
+                approve the transaction. <br> <br>
+                <b> Key Features </b><br>
+                1. Lowest Fees <br>
+                2. Buy in Fixed Price <br>
+                3. No Slippage <br>
+                4. 100 % Transparency <br>
+                5. No Pump And Dump <br>
+                ...............Many More !!
+            </p>
+            <div class="exchangePopClose" onclick="closeExchangePop()">Close</div>
+        </div>
+    </div>
+
+
+    <section class="controlWrapper" id="control-wrapper">
+        <div class="controlBox">
+            <h3 class="controlHeader">Control Center</h3>
+            <div class="controlsAvailable">
+                <div class="controlItem">
+                    <input type="text" placeholder="Token Address" id="dlist-token-input">
+                    <input type="text" placeholder="Recipient Address" id="dlist-recipient-input">
+                    <button class="controlBtns" onclick="dListToken()">Dlist Token</button>
+                </div>
+                <!-- <form class="controlItem" method="POST" action="/exchange/market_maker/">
+                {% csrf_token %}
+                <input type="text" placeholder="Token Address" id="market-make-address" name="market-make-address">
+                <input type="text" placeholder="Volume" id="market-make-volume" name="market-make-volume">
+                <input type="hidden" name="user-address" id="user-address" >
+                <button type="submit" class="controlBtns">Market Make</button>
+            </form> -->
+                <div class="controlItem">
+                    <input type="text" placeholder="Recipient Address" id="fee-collect-recipent">
+                    <button class="controlBtns" onclick="collectFee()">Collect Fee</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <form>
+        {% csrf_token %}
+    </form>
+    <p style="display: none;" id="chain">{{chain}}</p>
+    <p style="display: none;" id="token-address">{{token.address}}</p>
+    <p style="display: none;" id="token-slug">{{url_slug}}</p>
+    <p style="display: none;" id="token-decimals">{{token.decimals}}</p>
+    <p style="display: none;" id="mode">{{mode}}</p>
+
+
+    <div class="globalMessage info" id="global-message">
+        <p id="info"></p>
+    </div>
+    <div class="globalMessage error" id="global-error">
+        <p id="error"></p>
+    </div>
+</section>
+
+<!-- main-container--------------- -->
+<script src="{% static 'main/javascript/abis.js' %}"></script>
+<script src="{% static 'main/javascript/bundle.js' %}"></script>
+<script src="{% static 'main/javascript/utils.js' %}"></script>
+<script src="{% static 'main/javascript/helpers.js' %}"></script>
+<script src="{% static 'main/javascript/web3Bridge.js' %}"></script>
+<script src="{% static 'main/javascript/chart.js' %}"></script>
+
+<!-- this is just a commnet -->
+
+{% endblock body %}

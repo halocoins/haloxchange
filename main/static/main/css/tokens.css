@@ -1,0 +1,180 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-height: 90vh;
+    min-height: 90vh;
+}
+.tokenBox {
+    width: 85%;
+    background: rgb(30,30,30);
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(60,60,60);
+    border-radius: 2px;
+    padding: 20px;
+    gap: 20px;
+}
+.allTokenSide {
+    flex: 1;
+}
+.tokenSearch{
+    width: 100%;
+    font-size: 16px;
+    font-family: "Roboto Slab";
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: rgb(10,10,15);
+    outline: none;
+    border: 1px solid rgb(60,60,60);
+    padding: 7px 12px;
+    border-radius: 2px;
+    margin-bottom: 25px;
+}
+.allTokenList{
+    overflow-y: scroll;
+    height: 68vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    width: 100%;
+    padding: 5px 5px 5px 0px;
+}
+.tokenListItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    background: rgb(60,60,60);
+    padding: 3px 7px;
+    cursor: pointer;
+    border: 1px solid rgb(60,60,60);
+}
+.tokenListItem:hover {
+    border: 1px solid orange;
+    background: rgb(40,40,40);
+}
+.tokenListItem img{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.tokenListItem span{
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.tokenListItem small {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: rgb(185, 185, 185);
+}
+.tokenDetailSide {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 20px;
+}
+.tokenTop {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    border-bottom: 1px solid rgb(60,60,60);
+    width: 100%;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.tokenTop img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+
+}
+.detailDrawer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    gap: 20px;
+    width: 100%;
+    text-align: left;
+    letter-spacing: 1px;
+    font-weight: 300;
+}
+.detailHead {
+    width: 20%;
+    font-size: 11px;
+    color: rgb(170,170,170);
+}
+.detail {
+    width: 80%;
+    font-size: 12px;
+}
+#block-link{
+    font-size: 9px;
+}
+
+@media(max-width: 950px) {
+    .tokenBox {
+        width: 95%;
+    }
+}
+@media(max-width: 850px) {
+    .container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-height: none;
+        min-height: none;
+    }
+    .tokenBox {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        width: 85%;
+        background: rgb(30,30,30);
+        height: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        border: 1px solid rgb(60,60,60);
+        border-radius: 2px;
+        padding: 20px;
+        gap: 20px;
+    }
+    .allTokenSide {
+        height: 300px;
+        flex: none;
+    }
+}
+
+@media (max-width:635px) {
+    .tokenBox {
+        padding: 5px;
+        width: 100%;
+    }
+    .detailDrawer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #block-link{
+        word-break: break-all;
+    }
+}

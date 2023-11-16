@@ -1,0 +1,1417 @@
+.container {
+    width: 99%;
+    min-height: 90vh;
+    margin: auto;
+    border-left: 1px solid rgb(60, 60, 60);
+    border-right: 1px solid rgb(60, 60, 60);
+    margin-top: 8px;
+    background: rgb(20, 20, 20);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.topBar {
+    background: rgb(25, 25, 25);
+    border: 1px solid rgb(60, 60, 60);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 5px 10px;
+}
+
+.topAction {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.tokenChangeBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    background: rgb(60, 60, 60);
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.currencyChangeBox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 4px 8px;
+    border-radius: 2px;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    cursor: default;
+}
+
+.tokenChangeBox img,
+.currencyChangeBox img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.bscLink a {
+    color: orange;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.topStats {
+    flex: 1;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    color: rgb(170, 170, 170);
+}
+
+.topStats small {
+    font-size: 14px;
+    animation: glow 1.6s linear infinite;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0px 0px 2px orange;
+    }
+
+    50% {
+        text-shadow: 0px 0px 10px orange;
+    }
+
+    100% {
+        text-shadow: 0px 0px 2px orange;
+    }
+}
+
+.topStats span {
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+
+.priceBrace {
+    font-size: 15px;
+}
+
+#current-price {
+    font-size: 15px;
+}
+
+.topOptions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 25px;
+}
+
+.topOptions a i {
+    color: rgb(170, 170, 170);
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+}
+
+.topOptions a {
+    text-transform: uppercase;
+    color: orange;
+    letter-spacing: 1px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.mobileTopSwitch {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    justify-self: end;
+    text-align: right;
+    width: 100%;
+    font-size: 16px;
+    margin-right: 2px;
+    color: orange;
+    display: none;
+}
+
+.mobileTopOptions {
+    z-index: 88;
+    position: fixed;
+    top: 85px;
+    right: 16px;
+    background: rgb(25, 25, 25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px 20px;
+    border-radius: 2px;
+    border: 1px solid rgb(60, 60, 60);
+    gap: 8px;
+    display: none;
+}
+
+.mobileTopOptions a {
+    color: orange;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.mobileTopOptions a i {
+    color: rgb(170, 170, 170);
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+@media(max-width:1000px) {
+    .topOptions {
+        display: none;
+    }
+
+    .tokenChangeBox {
+        font-size: 10px;
+    }
+
+    .tokenChangeBox img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .bscLink {
+        font-size: 10px;
+    }
+
+    .topStats {
+        font-size: 10px;
+    }
+
+    .priceBrace {
+        font-size: 10px;
+    }
+
+    #current-price {
+        font-size: 10px;
+    }
+}
+
+@media(max-width:550px) {
+    .container {
+        border: none;
+        width: 99%;
+    }
+
+    .topBar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 4px 4px;
+        justify-content: flex-start;
+    }
+
+    .topAction {
+        justify-content: flex-start;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 3px;
+        border-radius: 2px;
+        width: 100%;
+    }
+
+    .topStats {
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+    }
+
+    #mobile-top-switch-open {
+        display: flex;
+    }
+
+}
+
+
+.actionContainer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+}
+
+.sideBlocks {
+    flex: 1;
+    border: 1px solid rgb(60, 60, 60);
+    border-bottom: none;
+    text-align: center;
+    padding: 5px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 78vh;
+    max-height: 78vh;
+}
+
+.sideBlockHeads {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: gray;
+}
+
+.orderBookHeads {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: gray;
+    padding: 3px 10px;
+    border-bottom: 1px solid rgb(60, 60, 60);
+    border-top: 1px solid rgb(60, 60, 60);
+    width: 100%;
+}
+
+.orderBookTitles {
+    font-size: 9px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 4px;
+    color: gray;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.orderBook {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    flex-grow: 1;
+}
+
+.orderBookParts {
+    width: 100%;
+    flex: 1;
+}
+
+#order-book-buy,
+#order-book-sell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-y: scroll;
+    max-height: 30vh;
+    min-height: 30vh;
+}
+
+#order-transaction-buy,
+#order-transaction-sell {
+    overflow-y: scroll;
+    max-height: 30vh;
+    min-height: 30vh;
+}
+
+#order-book-transactions {
+    display: none;
+}
+
+.orderBookItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 10px;
+    border: 1px solid rgb(60, 60, 60);
+    padding: 2px 5px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.orderBookItem:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-left: 1px solid orange;
+    border-right: 1px solid orange;
+}
+
+.orderPrice {
+    font-weight: 400;
+}
+
+.sellItem .orderPrice {
+    color: var(--sell);
+}
+
+.buyItem .orderPrice {
+    color: var(--buy);
+}
+
+.orderBookCenter {
+    background: rgb(60, 60, 60);
+    width: 100%;
+    padding: 4px 10px;
+    text-align: left;
+    font-size: 13px;
+    margin: 3px 0px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: white;
+}
+
+.centerBlock {
+    flex: 3;
+}
+
+.chartBlock {
+    height: auto;
+    padding: 5px;
+    border: 1px solid rgb(60, 60, 60);
+    overflow: hidden;
+}
+
+.tradingview-widget-container {
+    width: 100%;
+    color: white;
+}
+
+#chart-container {
+    color: white;
+    background: transparent;
+    max-height: 360px;
+    min-height: 360px;
+}
+
+.actionBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionEventBlock {
+    border: 1px solid rgb(60, 60, 60);
+    text-align: center;
+    padding: 12px 10px 5px 10px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.actionHeader {
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.actionText {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    color: rgb(170, 170, 170);
+}
+
+.actionText p i {
+    margin-right: 4px;
+    font-size: 15px;
+}
+
+.actionText p span {
+    color: white;
+    font-weight: 500;
+}
+
+.actionEventBlock input {
+    background: rgb(30, 30, 30);
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    padding: 8px 10px;
+    text-align: right;
+    margin-bottom: 5px;
+    font-family: "Roboto Slab";
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: white;
+    font-size: 14px;
+    outline: none;
+    border: 1px solid rgb(60, 60, 60);
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.conversion-text {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 300;
+    position: absolute;
+    bottom: -15px;
+    right: 0;
+    background: rgb(10, 10, 10);
+    width: 100%;
+    padding: 2px 10px;
+    color: white;
+    text-align: right;
+    display: none;
+}
+
+.error-text {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 200;
+    background: rgba(255, 166, 0, 0.1);
+    color: orange;
+    padding: 2px 10px;
+    border-radius: 2px;
+    display: none;
+}
+
+.actionEventButton {
+    font-family: "Roboto Slab";
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+}
+
+.actionEventButton:hover {
+    box-shadow: 0px 0px 10px black;
+    background: transparent;
+}
+
+.buyBtn {
+    background: var(--buy);
+    border: 1px solid var(--buy);
+}
+
+.buyBtn:hover {
+    color: var(--buy);
+}
+
+.sellBtn {
+    background: var(--sell);
+    border: 1px solid var(--sell);
+}
+
+.sellBtn:hover {
+    color: var(--sell);
+}
+
+@media(max-width:1000px) {
+    .centerBlock {
+        flex: 2.3;
+    }
+}
+
+@media(max-width:950px) {
+    .actionContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .centerBlock {
+        flex: 1;
+        width: 100%;
+        order: -1;
+    }
+
+    .sideBlocks {
+        width: 100%;
+    }
+}
+
+@media(max-width: 550px) {
+    .actionEventBlock {
+        padding: 4px 8px;
+        border: none;
+        border: 1px solid rgb(60, 60, 60);
+    }
+
+    .actionHeader {
+        font-size: 12px;
+    }
+
+    .actionText {
+        font-size: 8px;
+    }
+
+    .actionText p i {
+        font-size: 10px;
+    }
+
+    .actionEventBlock input {
+        font-size: 12px;
+        padding: 5px 6px;
+    }
+
+    .actionEventButton {
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}
+
+.orderHistorySwitch {
+    display: flex;
+    width: 100%;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    align-items: center;
+    justify-content: center;
+    margin: 4px 0px 5px 0px;
+    gap: 5px;
+    color: gray;
+}
+
+.orderHistorySwitch p {
+    padding: 4px 10px;
+    background: rgb(60, 60, 60);
+    border-radius: 2px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+}
+
+#current-pair-switch,
+#order-book-switch {
+    background: orange;
+    color: black;
+}
+
+#order-history-all {
+    display: none;
+}
+
+
+.orderHistory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100%;
+    flex-grow: 1;
+}
+
+.orderHistoryParts {
+    width: 100%;
+    flex: 1;
+}
+
+.orderHistoryHeads {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: gray;
+    padding: 3px 10px;
+    border-bottom: 1px solid rgb(60, 60, 60);
+    border-top: 1px solid rgb(60, 60, 60);
+}
+
+.orderHistoryList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    min-height: 30vh;
+    max-height: 30vh;
+}
+
+.orderHistoryItem {
+    font-size: 10px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgb(60, 60, 60);
+    padding: 1px 5px;
+}
+
+.orderHistoryItem p {
+    width: 100%;
+    text-align: left;
+}
+
+.orderMode {
+    font-weight: 500;
+}
+
+.historyBuy .orderMode {
+    color: var(--buy);
+}
+
+.historySell .orderMode {
+    color: var(--sell);
+}
+
+.orderHistoryItem a {
+    font-size: 12px;
+}
+
+.revoke {
+    color: orange;
+    cursor: pointer;
+}
+
+.complete {
+    color: rgb(170, 170, 170);
+}
+
+.listTokenWrapper,
+.changeTokenWrapper,
+.changeCurrencyWrapper,
+.changeThemeWrapper,
+.claimRewardWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(20, 20, 20, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    z-index: 9999;
+}
+
+.listTokenBox,
+.changeTokenBox,
+.changeCurrencyBox,
+.changeThemeBox,
+.claimRewardBox {
+    background: rgb(40, 40, 45);
+    padding: 30px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 38%;
+    text-align: center;
+    animation: openTokenLister 0.3s ease-in-out;
+}
+
+@keyframes openTokenLister {
+    0% {
+        transform: translateY(500px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.listTokenHeader,
+.changeTokenHeader,
+.changeCurrencyHeader,
+.changeThemeHeader,
+.claimRewardHeader {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.listTokenBox input,
+.changeTokenBox input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 2px;
+    background: rgb(20, 20, 20);
+    font-family: "Roboto Slab";
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 13px;
+    color: rgb(190, 190, 190);
+    text-align: center;
+}
+
+.listTokenError {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 200;
+    background: rgba(255, 166, 0, 0.1);
+    color: orange;
+    padding: 2px 10px;
+    border-radius: 2px;
+    width: 100%;
+    display: none;
+}
+
+.listTokenDetails {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    display: none;
+}
+
+.listTokenDetailItems {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(60, 60, 60);
+    padding: 2px 4px;
+}
+
+.listTokenAction,
+.claimAction {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+}
+
+.listTokenBtn,
+.listTokenBtnClose,
+.changeTokenCloseBtn,
+.changeCurrencyCloseBtn,
+.changeThemeCloseBtn,
+.claimBtnClose,
+.claimBtn {
+    width: 100%;
+    padding: 5px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid orange;
+    border-radius: 2px;
+    font-family: "Roboto Slab";
+}
+
+.listTokenBtn,
+.claimBtn {
+    background: orange;
+    color: black;
+}
+
+.listTokenBtnClose,
+.changeTokenCloseBtn,
+.changeCurrencyCloseBtn,
+.changeThemeCloseBtn,
+.claimBtnClose {
+    color: orange;
+    background: transparent;
+}
+
+.listTokenText {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: rgb(200, 200, 200);
+}
+
+.availableTokenList,
+.availableCurrencyList,
+.availableThemeList,
+.claimRewardAvailable {
+    max-height: 300px;
+    min-height: 130px;
+    overflow-y: scroll;
+    width: 100%;
+    background: rgb(30, 30, 30);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 10px;
+}
+
+.claimRewardAvailable p {
+    text-align: center;
+    color: rgb(170, 170, 170);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.claimRewardAvailable p span {
+    color: white;
+    font-weight: 500;
+}
+
+.availableTokenList a,
+.availableCurrencyList a {
+    width: 100%;
+    text-decoration: none;
+}
+
+.availableTokenItem,
+.availableCurrencyItem {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgb(200, 200, 200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+.availableTokenItem:hover,
+.availableCurrencyItem:hover,
+.themeItem:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid orange;
+}
+
+.availableTokenItem p,
+.availableCurrencyItem {
+    width: 100%;
+    text-align: left;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.list-volume {
+    text-align: right !important;
+    color: rgb(120, 120, 120) !important;
+    font-size: 10px !important;
+}
+
+.availableTokenItem img,
+.availableCurrencyItem img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.themeItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 12px;
+    width: 100%;
+    border: 1px solid rgb(60, 60, 60);
+    padding: 4px 10px 4px 4px;
+    cursor: pointer;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: rgb(170, 170, 170);
+    text-transform: uppercase;
+}
+
+.themeColorBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.themeColorBox div {
+    width: 25px;
+    height: 25px;
+    background: gray;
+}
+
+#color-orange {
+    background: orange;
+}
+
+#color-blue {
+    background: rgb(0, 150, 255);
+}
+
+#color-red-dim {
+    background: #ae1414;
+}
+
+#color-green-dim {
+    background: #128a52;
+}
+
+#color-red {
+    background: rgb(219, 0, 0);
+}
+
+#color-green {
+    background: rgb(0, 189, 0);
+}
+
+#color-red-tv {
+    background: #f23645;
+}
+
+#color-green-tv {
+    background: #089981;
+}
+
+#color-red-luke {
+    background: rgb(220, 20, 90);
+}
+
+#color-green-luke {
+    background: rgb(0, 136, 148);
+}
+
+@media(max-width:800px) {
+
+    .listTokenBox,
+    .changeTokenBox,
+    .changeCurrencyBox,
+    .changeThemeBox,
+    .claimRewardBox {
+        width: 95%;
+    }
+
+    .changeTokenBox {
+        padding: 15px 10px;
+    }
+
+    .availableTokenItem,
+    .availableCurrencyItem {
+        font-size: 9px;
+    }
+
+    .availableTokenList {
+        max-height: 400px;
+        min-height: 350px;
+    }
+}
+
+.newTokenBar {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    border-top: 1px solid rgb(60, 60, 60);
+    border-bottom: 1px solid rgb(60, 60, 60);
+}
+
+.tokenBarPart {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid rgb(60, 60, 60);
+    border-right: 1px solid rgb(60, 60, 60);
+    overflow: hidden;
+}
+
+.newTokenHeader {
+    font-size: 11px;
+    background: orange;
+    padding: 6px 8px;
+    color: black;
+    font-weight: bold;
+    letter-spacing: 1px;
+    z-index: 99;
+}
+
+.newTokenList {
+    z-index: 88;
+    flex: 1.5;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 9px;
+    letter-spacing: 1px;
+    gap: 30px;
+    animation: scroll 34s linear infinite;
+    transform: translateX(100%);
+}
+
+.trendingTokenList {
+    z-index: 88;
+    flex: 1.5;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 9px;
+    letter-spacing: 1px;
+    gap: 30px;
+    animation: scroll-back 20s linear infinite;
+    transform: translateX(100%);
+}
+
+.newTokenListItem {
+    color: rgb(200, 200, 200);
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.newTokenListItem:hover {
+    color: orange;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(90%);
+    }
+
+    100% {
+        transform: translateX(-90%);
+    }
+}
+
+@keyframes scroll-back {
+    0% {
+        transform: translateX(-30%);
+    }
+
+    100% {
+        transform: translateX(90%);
+    }
+}
+
+@media (max-width:900px) {
+    .newTokenBar {
+        display: none;
+    }
+}
+
+.preloader {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(20, 20, 20);
+    z-index: 999999;
+    /* display: none; */
+}
+
+.preloader img {
+    width: 20vw;
+    /* filter: drop-shadow(0px 0px 5px white); */
+}
+
+.modeChangeBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    border: 1px solid rgb(60, 60, 60);
+    font-size: 10px;
+    padding: 4px 10px;
+}
+
+.modeSwitch {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.modeSwitch div {
+    background: rgb(60, 60, 60);
+    border-radius: 2px;
+    padding: 2px 10px;
+    color: gray;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#limit-mode {
+    background: orange;
+    color: black;
+}
+
+.modeText {
+    color: gray;
+}
+
+.modeText p span {
+    color: white;
+    font-weight: 400;
+}
+
+.exchangePopWrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(20, 20, 20, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    z-index: 9999;
+}
+
+.exchangePopBox {
+    background: rgb(40, 40, 45);
+    padding: 30px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 38%;
+    text-align: left;
+    animation: openTokenLister 0.3s ease-in-out;
+}
+
+.exchangePopText {
+    background: rgb(30, 30, 30);
+    padding: 20px;
+    border-radius: 2px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 22px;
+}
+
+.exchangePopClose {
+    width: 100%;
+    padding: 5px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid orange;
+    border-radius: 2px;
+    font-family: "Roboto Slab";
+}
+
+@media(max-width:800px) {
+    .exchangePopBox {
+        width: 96%;
+        padding: 20px;
+    }
+
+    .exchangePopText {
+        font-size: 11px;
+    }
+}
+
+.tokenNotFound {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 2px;
+    background: rgb(0, 0, 0, 0.4);
+    display: none;
+}
+
+.tokenNotFound p {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.toSwapBtn {
+    padding: 5px 10px;
+    border-radius: 2px;
+    background: orange;
+    text-align: center;
+    color: black;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.promptWrapper {
+    z-index: 9999999;
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    display: none;
+}
+
+.promptWrapper img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* control-stylings-- */
+.controlWrapper {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    display: none;
+}
+
+.controlBox {
+    background: rgb(40, 40, 45);
+    padding: 30px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    text-align: center;
+}
+
+.controlHeader {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.controlsAvailable {
+    width: 100%;
+    background: rgb(30, 30, 30);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+}
+
+.controlItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: rgb(40, 40, 45);
+    padding: 4px;
+}
+
+.controlItem input {
+    width: 70%;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 2px;
+    background: rgb(20, 20, 20);
+    font-family: "Roboto Slab";
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 13px;
+    color: rgb(190, 190, 190);
+    text-align: center;
+}
+
+.controlItem button {
+    width: 50%;
+    padding: 5px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid orange;
+    border-radius: 2px;
+    font-family: "Roboto Slab";
+    background: orange;
+    color: black;
+}
+
+@media(max-width: 800px) {
+    .controlBox {
+        width: 90%;
+        padding: 20px 10px;
+    }
+
+    .controlItem {
+        flex-direction: column;
+        width: 100%;
+        padding: 15px 8px;
+    }
+
+    .controlItem input {
+        width: 100%;
+    }
+
+    .controlItem button {
+        font-size: 11px;
+        width: 100%;
+    }
+}

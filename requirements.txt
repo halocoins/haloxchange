@@ -1,0 +1,12 @@
+asgiref
+autopep8
+Django
+djangorestframework
+Pillow
+pytz
+sqlparse
+tomli
+tzdata
+whitenoise
+django-cors-headers
+requests

@@ -1,0 +1,122 @@
+.changeTokenWrapper {
+    top: 50px;
+    left: 0;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.changeTokenBox {
+    background: rgb(40, 40, 45);
+    padding: 30px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 35%;
+    text-align: center;
+}
+
+
+.changeTokenHeader {
+    font-size: 20px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.changeTokenBox input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 2px;
+    background: rgb(20, 20, 20);
+    font-family: "Roboto Slab";
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 13px;
+    color: rgb(190, 190, 190);
+    text-align: center;
+}
+
+
+
+.changeTokenCloseBtn {
+    width: 100%;
+    padding: 5px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid orange;
+    border-radius: 2px;
+    font-family: "Roboto Slab";
+}
+
+
+.availableTokenList {
+    max-height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+    background: rgb(30, 30, 30);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 10px;
+}
+
+.availableTokenList a {
+    width: 100%;
+    text-decoration: none;
+}
+
+.availableTokenItem {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgb(200, 200, 200);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 10px;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+.availableTokenItem:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid orange;
+}
+
+.availableTokenItem p{
+    width: 100%;
+    text-align: left;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.availableTokenItem img{
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+@media (max-width: 800px) {
+    .changeTokenBox {
+        width: 90%;
+    }
+}

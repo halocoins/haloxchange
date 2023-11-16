@@ -1,0 +1,2 @@
+let tokenAbi = []
+let contractABI = []

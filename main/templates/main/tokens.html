@@ -1,0 +1,108 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Tokens | HALOXCHANGE{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'main/css/tokens.css' %}">
+{% endblock head %}
+{% block body %}
+
+<nav>
+    <section class="navbar">
+        <div class="navLogoSection">
+            <a href="https://www.haloxchange.com">
+                <img src="{% static 'main/images/haloxchange.png' %}" alt="KREDICT LOGO">
+            </a>
+            <div class="navMenuSection">
+                <a href="https://haloxchange.com/presale" class="navMenuItem"><i class="las la-store"></i> Pre-sale</a>
+                <a href="https://exchange.haloxchange.com/" class="navMenuItem" id="active-menu"><i
+                        class="las la-exchange-alt"></i> Exchange</a>
+                <a href="https://swap.haloxchange.com/" class="navMenuItem"><i class="las la-sync"></i> Swap</a>
+                <a href="https://prediction.haloxchange.com/" class="navMenuItem"><i class="las la-star"></i> Prediction
+                    <small id="win-2">win 2x</small></a>
+            </div>
+        </div>
+    </section>
+</nav>
+
+<div class="navLine"></div>
+
+<section class="container">
+    <div class="tokenBox">
+        <div class="allTokenSide">
+            <input type="text" class="tokenSearch" id="token-search-input" placeholder="Search">
+            <div class="allTokenList">
+                {% for token in tokens %}
+                <a class="tokenListItem" href="/exchange/tokens/{{token.token.symbol}}">
+                    {% if not token.token.icon_url %}
+                    <img src="{% static 'main/images/token.png' %}" alt="token-icon">
+                    {% else %}
+                    <img src="{{ token.token.icon_url }}" alt="token-icon">
+                    {% endif %}
+                    <span>{{token.token.symbol}}</span>
+                    <small>({{token.token.name}})</small>
+                </a>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="tokenDetailSide">
+            <div class="tokenTop">
+                {% if not token_data.token.icon_url %}
+                <img src="{% static 'main/images/token.png' %}" alt="token-icon">
+                {% else %}
+                <img src="{{ token_data.token.icon_url }}" alt="token-icon">
+                {% endif %}
+                <h3 class="tokenName">{{token_data.token.symbol}} ({{token_data.token.name}})</h3>
+            </div>
+            <div class="detailDrawer">
+                <p class="detailHead">Listed on</p>
+                <p class="detail">{{token_data.token.listed_on}}</p>
+            </div>
+            <div class="detailDrawer">
+                <p class="detailHead">Total Supply</p>
+                <p class="detail" id="total-supply">-</p>
+            </div>
+            <div class="detailDrawer">
+                <p class="detailHead">Decimals</p>
+                <p class="detail" id="decimals">{{token_data.token.decimals}}</p>
+            </div>
+            <div class="detailDrawer">
+                <p class="detailHead">Chain ID</p>
+                <p class="detail">56</p>
+            </div>
+            <div class="detailDrawer">
+                <p class="detailHead">Address</p>
+                <p class="detail" id="token-address">{{token_data.token.address}}</p>
+            </div>
+            <div class="detailDrawer">
+                <p class="detailHead">Block Explorer</p>
+                <p class="detail" id="block-link">https://bscscan.com/token/{{token_data.token.address}}</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'main/javascript/abis.js' %}"></script>
+<script>
+    const web3 = new Web3('https://bsc-dataseed.binance.org');
+
+    $(document).ready(async function () {
+        await new Promise(r => setTimeout(r, 1000));
+
+        let token_address = document.getElementById('token-address').innerHTML
+        let decimals_ = document.getElementById('decimals').innerHTML
+
+        const tokenContract = new web3.eth.Contract(tokenAbi, token_address);
+        let totalSupply = await tokenContract.methods.totalSupply().call();
+
+        totalSupply = totalSupply / 10 ** Number(decimals_);
+        document.getElementById('total-supply').innerHTML = Number(totalSupply).toFixed(4);
+
+    });
+
+</script>
+
+
+{% endblock body %}
